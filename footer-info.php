@@ -21,10 +21,10 @@ function fi_settings_page_form()
     ?>
     <div class="wrap">
         <h1>Інформація в футері</h1>
-        <form method="post" action="options.php">
+        <form method="post" action="options.php" id="fi-form">
             <?php
             settings_fields('fi_settings_group');
-            do_settings_sections('footer-info-settings');
+            do_settings_sections('fi-settings');
             submit_button();
             ?>
         </form>
@@ -51,26 +51,26 @@ add_action('admin_init', function () {
         'fi_main_section',
         'Налаштування контактної інформації',
         null,
-        'footer-info-settings'
+        'fi-settings'
     );
 
     // Inputs
-    add_settings_field('fi_phone', 'Номер телефону', 'fi_phone_field', 'footer-info-settings', 'fi_main_section');
-    add_settings_field('fi_email', 'Email', 'fi_email_field', 'footer-info-settings', 'fi_main_section');
-    add_settings_field('fi_address', 'Адреса', 'fi_address_field', 'footer-info-settings', 'fi_main_section');
-    add_settings_field('fi_hours', 'Години роботи', 'fi_hours_field', 'footer-info-settings', 'fi_main_section');
+    add_settings_field('fi_phone', 'Номер телефону', 'fi_phone_field', 'fi-settings', 'fi_main_section');
+    add_settings_field('fi_email', 'Email', 'fi_email_field', 'fi-settings', 'fi_main_section');
+    add_settings_field('fi_address', 'Адреса', 'fi_address_field', 'fi-settings', 'fi_main_section');
+    add_settings_field('fi_hours', 'Години роботи', 'fi_hours_field', 'fi-settings', 'fi_main_section');
 
     // Checkboxes
-    add_settings_field('fi_show_phone', 'Показувати номер телефону?', 'fi_checkbox_field', 'footer-info-settings', 'fi_main_section', ['name' => 'fi_show_phone']);
-    add_settings_field('fi_show_email', 'Показувати Email?', 'fi_checkbox_field', 'footer-info-settings', 'fi_main_section', ['name' => 'fi_show_email']);
-    add_settings_field('fi_show_address', 'Показувати адресу?', 'fi_checkbox_field', 'footer-info-settings', 'fi_main_section', ['name' => 'fi_show_address']);
-    add_settings_field('fi_show_hours', 'Показувати години роботи?', 'fi_checkbox_field', 'footer-info-settings', 'fi_main_section', ['name' => 'fi_show_hours']);
+    add_settings_field('fi_show_phone', 'Показувати номер телефону?', 'fi_checkbox_field', 'fi-settings', 'fi_main_section', ['name' => 'fi_show_phone']);
+    add_settings_field('fi_show_email', 'Показувати Email?', 'fi_checkbox_field', 'fi-settings', 'fi_main_section', ['name' => 'fi_show_email']);
+    add_settings_field('fi_show_address', 'Показувати адресу?', 'fi_checkbox_field', 'fi-settings', 'fi_main_section', ['name' => 'fi_show_address']);
+    add_settings_field('fi_show_hours', 'Показувати години роботи?', 'fi_checkbox_field', 'fi-settings', 'fi_main_section', ['name' => 'fi_show_hours']);
 });
 
 // Fields functions
 function fi_phone_field() {
     $value = esc_attr(get_option('fi_phone', ''));
-    echo '<input type="text" name="fi_phone" value="' . $value . '" class="regular-text" placeholder="+380*********">';
+    echo '<input type="tel" name="fi_phone" id="fi_phone" value="' . $value . '" class="regular-text" placeholder="+380*********">';
     echo '<p class="description">Формат: +380*********</p>';
 }
 
@@ -124,8 +124,20 @@ add_action('wp_enqueue_scripts', 'fi_enqueue_styles');
 function fi_enqueue_styles() {
     wp_enqueue_style(
         'fi-footer-style',
-        plugin_dir_url(__FILE__) . 'styles.css',
+        plugin_dir_url(__FILE__) . 'styles/styles.css',
         array(),
         '1.0'
+    );
+}
+
+// Scripts
+add_action('admin_enqueue_scripts', 'fi_enqueue_scripts');
+function fi_enqueue_scripts() {
+    wp_enqueue_script(
+        'fi-script',
+        plugin_dir_url(__FILE__) . 'js/validator.js',
+        array('jquery'),
+        '1.1',
+        true
     );
 }
