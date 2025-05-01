@@ -14,7 +14,7 @@ const validator = () => {
             evt.preventDefault();
 
             phoneInput.style.borderColor = 'red';
-            alert('Помилка в форматі номеру телефону.\nБудь ласка, використовуйте формат:\n+380*********');
+            alert('Error in phone number format.\nPlease use the format:\n+380*********');
         } else {
             phoneInput.style.borderColor = '';
         }

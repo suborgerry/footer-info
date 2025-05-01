@@ -4,7 +4,7 @@ A simple WordPress plugin that lets you add and display contact information auto
 
 ## 🔍 What does this plugin do?
 
-- Adds a settings page under **Settings → Footer Info**
+- Adds a settings page under **Settings → Information in footer**
 - Allows the site administrator to input:
   - 📞 Phone number
   - ✉️ Email address
