@@ -1,0 +1,16 @@
+.fi-footer-block {
+    padding: 20px;
+    background: #000;
+    color: #fff;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.fi-footer-phone,
+.fi-footer-email,
+.fi-footer-address,
+.fi-footer-hours {
+    margin: 5px 0;
+}
