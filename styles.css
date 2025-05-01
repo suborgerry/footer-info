@@ -1,0 +1,12 @@
+.fi-footer-block {
+    background: #f5f5f5;
+    padding: 10px;
+    text-align: center;
+}
+
+.fi-footer-phone,
+.fi-footer-email,
+.fi-footer-address,
+.fi-footer-hours {
+    margin: 5px 0;
+}
